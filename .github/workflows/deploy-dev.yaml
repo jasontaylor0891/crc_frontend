@@ -28,8 +28,10 @@ jobs:
         uses: anishathalye/proof-html@v2
         with:
           directory: ./website
+          enforce_https: false
           check_html: false
-          ignore_url: https://www.instagram.com/funkmushanft
+          ignore_url: |
+            https://www.instagram.com/funkmushanft/
           
 
       - name: Configure AWS Credentials

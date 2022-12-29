@@ -1,0 +1,35 @@
+name: deploy to prod
+
+on:
+  push:
+    branches: 
+    - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v3
+      - id: dsv
+        uses: DelineaXPM/dsv-github-action@v2.0.2
+        with:
+          domain: ${{ secrets.DSV_SERVER }}
+          clientId: ${{ secrets.DSV_CLIENT_ID }}
+          clientSecret: ${{ secrets.DSV_CLIENT_SECRET }}
+          retrieve: |
+            [
+               {"secretPath": "ci:dsv-github-action-demo:dsvdemo", "secretKey": "aws_keyid", "outputVariable": "SECRETVAL1"},
+               {"secretPath": "ci:dsv-github-action-demo:dsvdemo", "secretKey": "aws_ssecret_access_key", "outputVariable": "SECRETVAL2"},
+               {"secretPath": "ci:dsv-github-action-demo:awsbucket", "secretKey": "aws_bucket", "outputVariable": "SECRETVAL3"}  
+            ]
+            
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1-node16
+        with:
+          aws-access-key-id: ${{ env.SECRETVAL1 }}
+          aws-secret-access-key: ${{ env.SECRETVAL2 }}
+          aws-region: us-east-2
+      - name: Copy files to the test website with the AWS CLI
+        run: |
+          aws s3 cp index.html s3://${{ secrets.AWS_BUCKET }}

@@ -26,7 +26,7 @@ jobs:
             ]
       - name: list files
         run: ls -al      
-        
+
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1-node16
         with:
@@ -35,4 +35,4 @@ jobs:
           aws-region: us-east-2
       - name: Copy files to the test website with the AWS CLI
         run: |
-          run: aws s3 sync ./website s3://${{ secrets.DEV_AWS_BUCKET }}
+          run: aws s3 cp ./website s3://${{ secrets.DEV_AWS_BUCKET }} – recursive

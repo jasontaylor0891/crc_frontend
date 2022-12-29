@@ -1,7 +1,6 @@
 name: deploy to dev
 
 on:
-  pull_request:
   push:
     branches: 
     - develop
@@ -24,15 +23,6 @@ jobs:
                {"secretPath": "ci:dsv-github-action-demo:dsvdemo", "secretKey": "aws_ssecret_access_key", "outputVariable": "SECRETVAL2"},
                {"secretPath": "ci:dsv-github-action-demo:awsbucket", "secretKey": "aws_bucket", "outputVariable": "SECRETVAL3"}  
             ]
-      - name: proof-html
-        uses: anishathalye/proof-html@v2
-        with:
-          directory: ./website
-          enforce_https: false
-          check_html: false
-          ignore_url: |
-            https://www.instagram.com/funkmushanft/
-          
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1-node16

@@ -29,6 +29,7 @@ jobs:
         with:
           directory: ./website
           check_html: false
+          ignore_url: https://www.instagram.com/funkmushanft
           
 
       - name: Configure AWS Credentials

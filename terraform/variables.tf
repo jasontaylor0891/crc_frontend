@@ -1,15 +1,23 @@
 variable "access_key" {
 description = "AWS Access key"
-default = "AKIAVRTKZCMUQOETZEMO"
 }
 
 variable "secret_key" {
 description = "AWS Secret Key"
-default = "MW0xIEZ4KXi6u3BbQv6wVztXUTrEo1NIwwRe2fT3"
 }
 
 variable "region" {
-description = "AWS region for hosting our EC2 instance"
+description = "AWS region"
 default = "us-east-2"
+}
+
+variable "domain_name" {
+description = "Domain Name for the cloud resume challange"
+default = "jasontaylor.info"
+}
+
+variable "bucket_name" {
+description = "Bucket Name for the cloud resume challange"
+default = "jasontaylor.info"
 }
 

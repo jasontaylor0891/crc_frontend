@@ -19,7 +19,7 @@ provider "aws" {
 
 #S3 Bucket for production
 resource "aws_s3_bucket" "cloud-resume-challenge" {
-  bucket = "jt-cloud-resume-challenge-website"
+  bucket = "${var.bucket_name}"
 
   tags = {
     Name = "crc"
@@ -65,6 +65,25 @@ resource "aws_s3_bucket_policy" "cloud-resume-challenge" {
   })
 }
 
+#Configure subdomain
+resource "aws_s3_bucket" "cloud-resume-challenge-www" {
+  bucket = "www.${var.bucket_name}"
+
+  tags = {
+    Name = "crc"
+  }
+
+}
+resource "aws_s3_bucket_website_configuration" "cloud-resume-challenge-www" {
+  bucket = aws_s3_bucket.cloud-resume-challenge-www.id
+
+  redirect_all_requests_to {
+    host_name = "www.${var.domain_name}"
+    protocol  = "https"
+  }
+  
+
+}
 
 #S3 Bucket for dev/testing
 resource "aws_s3_bucket" "cloud-resume-challenge-dev" {

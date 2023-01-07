@@ -13,11 +13,11 @@ default = "us-east-2"
 
 variable "domain_name" {
 description = "Domain Name for the cloud resume challange"
-default = "jasontaylor.info"
+default = "jt-cloud-resume-challenge.com"
 }
 
 variable "bucket_name" {
 description = "Bucket Name for the cloud resume challange"
-default = "jasontaylor.info"
+default = "jt-cloud-resume-challenge.com"
 }
 

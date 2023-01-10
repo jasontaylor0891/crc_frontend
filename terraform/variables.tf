@@ -8,7 +8,7 @@ description = "AWS Secret Key"
 
 variable "region" {
 description = "AWS region"
-default = "us-east-2"
+default = "us-east-1"
 }
 
 variable "domain_name" {
